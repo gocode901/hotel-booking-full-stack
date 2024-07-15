@@ -7,6 +7,7 @@ import {
   UserType,
 } from "../../backend/src/shared/types";
 import { BookingFormData } from "./forms/BookingForm/BookingForm";
+
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
 
 export const fetchCurrentUser = async (): Promise<UserType> => {
@@ -29,10 +30,16 @@ export const register = async (formData: RegisterFormData) => {
     body: JSON.stringify(formData),
   });
 
-  const responseBody = await response.json();
+  let responseBody: any;
+
+  try {
+    responseBody = await response.json();
+  } catch (error) {
+    console.log(error);
+  }
 
   if (!response.ok) {
-    throw new Error(responseBody.message);
+    throw new Error(responseBody.message || "Something went wrong");
   }
 };
 
