@@ -2,3 +2,4 @@ node_modules
 .env
 .vscode
 dist
+.env.e2e
