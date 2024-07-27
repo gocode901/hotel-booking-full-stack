@@ -11,7 +11,7 @@ const DetailsSection = () => {
     <div className="flex flex-col gap-4">
       <h1 className="text-3xl font-bold mb-3">Add Hotel</h1>
       <label className="text-gray-700 text-sm font-bold flex-1">
-        Name
+        Name of the Hotel
         <input
           type="text"
           className="border rounded w-full py-1 px-2 font-normal"
@@ -49,7 +49,7 @@ const DetailsSection = () => {
       <label className="text-gray-700 text-sm font-bold flex-1">
         Description
         <textarea
-          rows={10}
+          rows={5}
           className="border rounded w-full py-1 px-2 font-normal"
           {...register("description", { required: "This field is required" })}
         ></textarea>
@@ -58,7 +58,19 @@ const DetailsSection = () => {
         )}
       </label>
       <label className="text-gray-700 text-sm font-bold max-w-[50%]">
-        Price Per Night
+        Rooms available
+        <input
+          type="number"
+          min={1}
+          className="border rounded w-full py-1 px-2 font-normal"
+          {...register("totalrooms", { required: "This field is required" })}
+        ></input>
+        {errors.totalrooms && (
+          <span className="text-red-500">{errors.totalrooms.message}</span>
+        )}
+      </label>
+      <label className="text-gray-700 text-sm font-bold max-w-[50%]">
+        Price (in Rs)
         <input
           type="number"
           min={1}

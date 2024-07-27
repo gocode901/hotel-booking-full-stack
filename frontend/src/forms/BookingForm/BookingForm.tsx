@@ -4,7 +4,6 @@ import {
   UserType,
 } from "../../../../backend/src/shared/types";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { StripeCardElement } from "@stripe/stripe-js";
 import { useSearchContext } from "../../contexts/SearchContext";
 import { useParams } from "react-router-dom";
 import { useMutation } from "react-query";
@@ -27,12 +26,10 @@ export type BookingFormData = {
   hotelId: string;
   paymentIntentId: string;
   totalCost: number;
+  rooms:number
 };
 
 const BookingForm = ({ currentUser, paymentIntent }: Props) => {
-  const stripe = useStripe();
-  const elements = useElements();
-
   const search = useSearchContext();
   const { hotelId } = useParams();
 
@@ -65,20 +62,8 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
     },
   });
 
-  const onSubmit = async (formData: BookingFormData) => {
-    if (!stripe || !elements) {
-      return;
-    }
-
-    const result = await stripe.confirmCardPayment(paymentIntent.clientSecret, {
-      payment_method: {
-        card: elements.getElement(CardElement) as StripeCardElement,
-      },
-    });
-
-    if (result.paymentIntent?.status === "succeeded") {
-      bookRoom({ ...formData, paymentIntentId: result.paymentIntent.id });
-    }
+  const onSubmit = async () => {
+  //  payment procedure
   };
 
   return (
@@ -125,7 +110,7 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
 
         <div className="bg-blue-200 p-4 rounded-md">
           <div className="font-semibold text-lg">
-            Total Cost: £{paymentIntent.totalCost.toFixed(2)}
+            Total Cost: Rs {paymentIntent.totalCost.toFixed(2)}
           </div>
           <div className="text-xs">Includes taxes and charges</div>
         </div>

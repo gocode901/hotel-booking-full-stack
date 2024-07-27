@@ -11,6 +11,7 @@ export type BookingType = {
   checkIn: Date;
   checkOut: Date;
   totalCost: number;
+  rooms: number;
 };
 
 export type HotelType = {
@@ -29,6 +30,7 @@ export type HotelType = {
   imageUrls: string[];
   lastUpdated: Date;
   bookings: BookingType[];
+  totalRooms:number;
 };
 
 const bookingSchema = new mongoose.Schema<BookingType>({
@@ -41,6 +43,7 @@ const bookingSchema = new mongoose.Schema<BookingType>({
   checkOut: { type: Date, required: true },
   userId: { type: String, required: true },
   totalCost: { type: Number, required: true },
+  rooms: {type: Number, required: true}
 });
 
 const hotelSchema = new mongoose.Schema<HotelType>({
@@ -58,6 +61,7 @@ const hotelSchema = new mongoose.Schema<HotelType>({
   imageUrls: [{ type: String, required: true }],
   lastUpdated: { type: Date, required: true },
   bookings: [bookingSchema],
+  totalRooms: {type: Number, required: true}
 });
 
 const Hotel = mongoose.model<HotelType>("Hotel", hotelSchema);

@@ -31,7 +31,8 @@ const Register = () => {
       navigate("/");
     },
     onError: (error: Error) => {
-      showToast({ message: error.message, type: "ERROR" });
+      console.log(error)
+      showToast({ message: "Error", type: "ERROR" });
     },
   });
 

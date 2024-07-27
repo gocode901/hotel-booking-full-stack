@@ -14,6 +14,7 @@ type GuestInfoFormData = {
   checkOut: Date;
   adultCount: number;
   childCount: number;
+  rooms:number;
 };
 
 const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
@@ -34,6 +35,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
       checkOut: search.checkOut,
       adultCount: search.adultCount,
       childCount: search.childCount,
+      rooms:search.rooms,
     },
   });
 
@@ -50,7 +52,8 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
       data.checkIn,
       data.checkOut,
       data.adultCount,
-      data.childCount
+      data.childCount,
+      data.rooms,
     );
     navigate("/sign-in", { state: { from: location } });
   };
@@ -61,14 +64,15 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
       data.checkIn,
       data.checkOut,
       data.adultCount,
-      data.childCount
+      data.childCount,
+      data.rooms,
     );
     navigate(`/hotel/${hotelId}/booking`);
   };
 
   return (
     <div className="flex flex-col p-4 bg-blue-200 gap-4">
-      <h3 className="text-md font-bold">£{pricePerNight}</h3>
+      <h3 className="text-md font-bold">Rs {pricePerNight}</h3>
       <form
         onSubmit={
           isLoggedIn ? handleSubmit(onSubmit) : handleSubmit(onSignInClick)
@@ -140,7 +144,22 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
                 {errors.adultCount.message}
               </span>
             )}
+          </div >
+          <div className="flex bg-white px-2 py-1">
+          <label className="items-center flex">
+              Rooms:
+              <input
+                className="w-full p-1 focus:outline-none font-bold"
+                type="number"
+                min={0}
+                max={20}
+                {...register("rooms", {
+                  valueAsNumber: true,
+                })}
+              />
+            </label>
           </div>
+
           {isLoggedIn ? (
             <button className="bg-blue-600 text-white h-full p-2 font-bold hover:bg-blue-500 text-xl">
               Book Now
