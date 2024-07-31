@@ -63,10 +63,10 @@ const DetailsSection = () => {
           type="number"
           min={1}
           className="border rounded w-full py-1 px-2 font-normal"
-          {...register("totalrooms", { required: "This field is required" })}
+          {...register("rooms_available", { required: "This field is required" })}
         ></input>
-        {errors.totalrooms && (
-          <span className="text-red-500">{errors.totalrooms.message}</span>
+        {errors.rooms_available && (
+          <span className="text-red-500">{errors.rooms_available.message}</span>
         )}
       </label>
       <label className="text-gray-700 text-sm font-bold max-w-[50%]">

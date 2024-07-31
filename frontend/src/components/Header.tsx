@@ -20,6 +20,7 @@ const Header = () => {
   const [checkOut, setCheckOut] = useState<Date>(search.checkOut);
   const [adultCount, setAdultCount] = useState<number>(search.adultCount);
   const [childCount, setChildCount] = useState<number>(search.childCount);
+  const [rooms_to_book, setRoomsToBook] = useState<number>(search.rooms_to_book);
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
@@ -28,7 +29,8 @@ const Header = () => {
       checkIn,
       checkOut,
       adultCount,
-      childCount
+      childCount,
+      rooms_to_book,
     );
     navigate("/search");
   };
@@ -41,6 +43,7 @@ const Header = () => {
     setDestination('');
     setAdultCount(0);
     setChildCount(0);
+    setRoomsToBook(1);
     setCheckIn(new Date());
     setCheckOut(new Date());
   };

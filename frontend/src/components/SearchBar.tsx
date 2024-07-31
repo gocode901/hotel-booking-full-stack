@@ -14,6 +14,7 @@ const SearchBar = () => {
   const [checkOut, setCheckOut] = useState<Date>(search.checkOut);
   const [adultCount, setAdultCount] = useState<number>(search.adultCount);
   const [childCount, setChildCount] = useState<number>(search.childCount);
+  const [rooms, setRooms] = useState<number>(search.rooms);
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
@@ -22,7 +23,8 @@ const SearchBar = () => {
       checkIn,
       checkOut,
       adultCount,
-      childCount
+      childCount,
+      rooms,
     );
     navigate("/search");
   };
