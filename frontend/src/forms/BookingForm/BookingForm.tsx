@@ -26,7 +26,7 @@ export type BookingFormData = {
   hotelId: string;
   paymentIntentId: string;
   totalCost: number;
-  rooms:number
+  rooms_to_book:number
 };
 
 const BookingForm = ({ currentUser, paymentIntent }: Props) => {
@@ -62,8 +62,9 @@ const BookingForm = ({ currentUser, paymentIntent }: Props) => {
     },
   });
 
-  const onSubmit = async () => {
-  //  payment procedure
+  const onSubmit = async (data: BookingFormData) => {
+    // Here we call bookRoom with the form data to perform the mutation
+    bookRoom(data);
   };
 
   return (

@@ -14,7 +14,7 @@ type GuestInfoFormData = {
   checkOut: Date;
   adultCount: number;
   childCount: number;
-  rooms:number;
+  rooms_to_book:number;
 };
 
 const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
@@ -35,7 +35,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
       checkOut: search.checkOut,
       adultCount: search.adultCount,
       childCount: search.childCount,
-      rooms:search.rooms,
+      rooms_to_book:search.rooms_to_book,
     },
   });
 
@@ -53,7 +53,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
       data.checkOut,
       data.adultCount,
       data.childCount,
-      data.rooms,
+      data.rooms_to_book,
     );
     navigate("/sign-in", { state: { from: location } });
   };
@@ -65,7 +65,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
       data.checkOut,
       data.adultCount,
       data.childCount,
-      data.rooms,
+      data.rooms_to_book,
     );
     navigate(`/hotel/${hotelId}/booking`);
   };
@@ -153,7 +153,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
                 type="number"
                 min={0}
                 max={20}
-                {...register("rooms", {
+                {...register("rooms_to_book", {
                   valueAsNumber: true,
                 })}
               />
