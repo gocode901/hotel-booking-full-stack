@@ -3,6 +3,8 @@ import DatePicker from "react-datepicker";
 import { useSearchContext } from "../../contexts/SearchContext";
 import { useAppContext } from "../../contexts/AppContext";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useQuery } from "react-query";
+import * as apiClient from "../../api-client";
 
 type Props = {
   hotelId: string;
@@ -23,6 +25,14 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const { data: hotel } = useQuery(
+    "fetchHotelById",
+    () => apiClient.fetchHotelById(hotelId || ""),
+    {
+      enabled: !!hotelId,
+    }
+  );
+
   const {
     watch,
     register,
@@ -35,7 +45,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
       checkOut: search.checkOut,
       adultCount: search.adultCount,
       childCount: search.childCount,
-      rooms_to_book:search.rooms_to_book,
+      rooms_to_book:1,
     },
   });
 
@@ -152,7 +162,7 @@ const GuestInfoForm = ({ hotelId, pricePerNight }: Props) => {
                 className="w-full p-1 focus:outline-none font-bold"
                 type="number"
                 min={0}
-                max={20}
+                max={hotel?.rooms_available}
                 {...register("rooms_to_book", {
                   valueAsNumber: true,
                 })}
